@@ -1,0 +1,21 @@
+{
+  "name": "hr-app",
+  "version": "1.0.0",
+  "description": "hr application",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Haroon Hayat",
+  "license": "ISC",
+  "dependencies": {
+    "convict": "^6.2.4",
+    "convict-format-with-validator": "^6.2.0",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "joi": "^17.12.3",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.0"
+  }
+}
