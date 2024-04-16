@@ -16,6 +16,9 @@ const config = convict({
     env: 'PORT',
     arg: 'port',
   },
+  db: {
+    
+  }
 });
 
 const env = config.get('env');
