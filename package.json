@@ -8,6 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "db:migrate": "npx sequelize db:migrate",
     "db:migrate:undo": "npx sequelize db:migrate:undo",
+    "db:migrate:undo:all": "npx sequelize db:migrate:undo:all",
     "db:migrate:create": "npx sequelize migration:generate --name"
   },
   "author": "Haroon Hayat",
