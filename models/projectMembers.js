@@ -43,3 +43,5 @@ const ProjectMember = sequelize.define(
     },
   }
 );
+
+export default ProjectMember;
