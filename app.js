@@ -2,6 +2,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const express = require('express');
 const routes = require('./routes');
+require('./models');
 
 function init() {
   const app = express();

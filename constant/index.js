@@ -1,1 +1,1 @@
-export const GENDER_OPTIONS = Object.freeze(['male', 'female', 'other']);
+exports.GENDER_OPTIONS = Object.freeze(['male', 'female', 'other']);
