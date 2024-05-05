@@ -47,3 +47,5 @@ const OrganizatinalData = sequelize.define(
     },
   }
 );
+
+export default OrganizatinalData;
