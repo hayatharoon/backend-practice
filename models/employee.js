@@ -54,10 +54,10 @@ const Employee = sequelize.define(
   {
     hooks: {
       beforeCreate: (record) => {
-        (record.createdAt = moment().unix()), (record.updatedAt = moment().unix());
+        (record.createdAt = moment().unix()), (record.updatedAt = moment().unix()), (record.DOB = moment().unix());
       },
       beforeUpdate: (record) => {
-        record.updatedAt = moment().unix();
+        (record.updatedAt = moment().unix()), (record.DOB = moment().unix());
       },
     },
   }

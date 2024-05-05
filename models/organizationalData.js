@@ -2,8 +2,8 @@ const moment = require('moment');
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = new Sequelize('sqlite::memory:');
 
-const Experience = sequelize.define(
-  'experience',
+const OrganizatinalData = sequelize.define(
+  'OrganizatinalData',
   {
     id: {
       allowNull: false,
@@ -11,16 +11,20 @@ const Experience = sequelize.define(
       autoIncrement: true,
       type: DataTypes.INTEGER,
     },
-    organizationName: {
+    jobTitle: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    startDate: {
+    hiredDate: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    endDate: {
+    salary: {
       type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    accountNumber: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
     createdAt: {
@@ -35,15 +39,11 @@ const Experience = sequelize.define(
   {
     hooks: {
       beforeCreate: (record) => {
-        (record.createdAt = moment().unix()),
-          (record.updatedAt = moment().unix()),
-          (record.startDate = moment().unix()),
-          (record.endDate = moment().unix());
+        (record.createdAt = moment().unix()), (record.updatedAt = moment().unix()), (record.hiredDate = moment().unix());
       },
       beforeUpdate: (record) => {
-        (record.updatedAt = moment().unix()), (record.startDate = moment().unix()), (record.endDate = moment().unix());
+        (record.updatedAt = moment().unix()), (record.hiredDate = moment().unix());
       },
     },
   }
 );
-export default Experience;
