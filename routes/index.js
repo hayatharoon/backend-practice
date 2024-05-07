@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const userRouter = require('./user');
 
-router.post('/test', (req, res) => {
-  res.json({ message: 'Hello World' });
-});
+router.use('/users', userRouter);
 
 module.exports = router;
