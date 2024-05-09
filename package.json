@@ -14,6 +14,7 @@
   "author": "Haroon Hayat",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "convict": "^6.2.4",
     "convict-format-with-validator": "^6.2.0",
     "cors": "^2.8.5",
