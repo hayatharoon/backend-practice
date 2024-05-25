@@ -1,5 +1,4 @@
 const { User } = require('../models');
-const { filterObject } = require('../utils');
 
 module.exports = {
   getUsers: async (_, res) => {
@@ -51,7 +50,6 @@ module.exports = {
     }
   },
   createUser: async (req, res) => {
-    console.log(req.body);
     try {
       const { email, password, role } = req.body;
       const user = await User.create({
@@ -81,14 +79,20 @@ module.exports = {
   updateUser: async (req, res) => {
     try {
       const { id } = req.params;
-      const user = await User.findByPk(id);
+      const user = await User.findByPk(id, {
+        attributes: { exclude: ['password'] },
+      });
+      console.log(req.body);
+
       if (!user) {
         return res.status(404).json({
           status: 'fail',
           message: 'User not found',
         });
       }
-      await user.update(req.body);
+      await user.update(req.body, {
+        silent: true,
+      });
       res.status(200).json({
         status: 'success',
         message: 'User updated successfully',
@@ -121,13 +125,7 @@ module.exports = {
       res.status(200).send({
         status: 'success',
         message: 'User deleted successfully',
-        user: {
-          id: user.id,
-          email: user.email,
-          role: user.role,
-          createdAt: user.createdAt,
-          updatedAt: user.updatedAt,
-        },
+        user,
       });
     } catch (error) {
       console.log('🚀 ~ deleteUser: ~ error:', error);

@@ -40,6 +40,7 @@ module.exports = (sequelize, DataTypes) => {
           record.password = await encryptPassword(record.password);
         },
         beforeUpdate: (record) => {
+          record.createdAt = moment().unix();
           record.updatedAt = moment().unix();
         },
       },
