@@ -25,11 +25,18 @@ module.exports = {
     try {
       const { id } = req.params;
       const user = await User.findByPk(id);
-      res.status(200).json({
-        status: 'success',
-        message: 'User retrieved successfully',
-        data: user,
-      });
+      if (user) {
+        res.status(200).json({
+          status: 'success',
+          message: 'User retrieved successfully',
+          data: user,
+        });
+      } else {
+        res.status(404).json({
+          status: 'fail',
+          message: 'User not found',
+        });
+      }
     } catch (error) {
       console.log('🚀 ~ getUsers: ~ error:', error);
       const message = error.message || 'Something went wrong';
@@ -45,11 +52,10 @@ module.exports = {
     console.log(req.body);
     try {
       const { email, password, role } = req.body;
-      const hashPassword = encryptPassword(password);
       const user = await User.create({
-        email,
-        password: hashPassword,
         role,
+        email,
+        password,
       });
       res.status(201).json({
         status: 'success',

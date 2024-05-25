@@ -1,4 +1,5 @@
 const moment = require('moment');
+const { encryptPassword } = require('../utils');
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
@@ -33,9 +34,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       hooks: {
-        beforeCreate: (record) => {
+        beforeCreate: async (record) => {
           record.createdAt = moment().unix();
           record.updatedAt = moment().unix();
+          record.password = await encryptPassword(record.password);
         },
         beforeUpdate: (record) => {
           record.updatedAt = moment().unix();
