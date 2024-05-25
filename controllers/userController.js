@@ -1,10 +1,10 @@
 const { User } = require('../models');
-const { encryptPassword } = require('../utils');
+const { filterObject } = require('../utils');
 
 module.exports = {
   getUsers: async (_, res) => {
     try {
-      const users = await User.findAll();
+      const users = await User.findAll({ attributes: { exclude: ['password'] } });
       res.status(200).json({
         status: 'success',
         message: 'Users retrieved successfully',
@@ -24,7 +24,9 @@ module.exports = {
   getUserById: async (req, res) => {
     try {
       const { id } = req.params;
-      const user = await User.findByPk(id);
+      const user = await User.findByPk(id, {
+        attributes: { exclude: ['password'] },
+      });
       if (user) {
         res.status(200).json({
           status: 'success',
@@ -105,7 +107,10 @@ module.exports = {
   },
   deleteUser: async (req, res) => {
     try {
-      const user = await User.findByPk(req.params.id);
+      const { id } = req.params;
+      const user = await User.findByPk(id, {
+        attributes: { exclude: ['password'] },
+      });
       if (!user) {
         return res.status(404).json({
           status: 'fail',
@@ -113,9 +118,16 @@ module.exports = {
         });
       }
       await user.destroy();
-      res.status(204).json({
+      res.status(200).send({
         status: 'success',
         message: 'User deleted successfully',
+        user: {
+          id: user.id,
+          email: user.email,
+          role: user.role,
+          createdAt: user.createdAt,
+          updatedAt: user.updatedAt,
+        },
       });
     } catch (error) {
       console.log('🚀 ~ deleteUser: ~ error:', error);
