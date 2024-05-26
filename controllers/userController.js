@@ -1,4 +1,5 @@
 const { User } = require('../models');
+const { errorHandler } = require('../utils');
 
 module.exports = {
   getUsers: async (_, res) => {
@@ -10,14 +11,7 @@ module.exports = {
         data: users,
       });
     } catch (error) {
-      console.log('🚀 ~ getUsers: ~ error:', error);
-      const message = error.message || 'Something went wrong';
-      const statusCode = error.status || 500;
-      const status = String(statusCode).startsWith(4) ? 'fail' : 'error';
-      res.status(statusCode).json({
-        status,
-        message,
-      });
+      errorHandler(error, res);
     }
   },
   getUserById: async (req, res) => {
@@ -39,14 +33,7 @@ module.exports = {
         });
       }
     } catch (error) {
-      console.log('🚀 ~ getUsers: ~ error:', error);
-      const message = error.message || 'Something went wrong';
-      const statusCode = error.status || 500;
-      const status = String(statusCode).startsWith(4) ? 'fail' : 'error';
-      res.status(statusCode).json({
-        status,
-        message,
-      });
+      errorHandler(error, res);
     }
   },
   createUser: async (req, res) => {
@@ -66,14 +53,7 @@ module.exports = {
         },
       });
     } catch (error) {
-      console.log('🚀 ~ createUser: ~ error:', error);
-      const message = error.message || 'Something went wrong';
-      const statusCode = error.status || 500;
-      const status = String(statusCode).startsWith(4) ? 'fail' : 'error';
-      res.status(statusCode).json({
-        status,
-        message,
-      });
+      errorHandler(error, res);
     }
   },
   updateUser: async (req, res) => {
@@ -98,14 +78,7 @@ module.exports = {
         data: user,
       });
     } catch (error) {
-      console.log('🚀 ~ updateUser: ~ error:', error);
-      const message = error.message || 'Something went wrong';
-      const statusCode = error.status || 500;
-      const status = String(statusCode).startsWith(4) ? 'fail' : 'error';
-      res.status(statusCode).json({
-        status,
-        message,
-      });
+      errorHandler(error, res);
     }
   },
   deleteUser: async (req, res) => {
@@ -127,14 +100,7 @@ module.exports = {
         user,
       });
     } catch (error) {
-      console.log('🚀 ~ deleteUser: ~ error:', error);
-      const message = error.message || 'Something went wrong';
-      const statusCode = error.status || 500;
-      const status = String(statusCode).startsWith(4) ? 'fail' : 'error';
-      res.status(statusCode).json({
-        status,
-        message,
-      });
+      errorHandler(error, res);
     }
   },
 };
