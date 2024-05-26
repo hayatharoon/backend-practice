@@ -82,7 +82,6 @@ module.exports = {
       const user = await User.findByPk(id, {
         attributes: { exclude: ['password'] },
       });
-      console.log(req.body);
 
       if (!user) {
         return res.status(404).json({

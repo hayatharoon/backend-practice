@@ -24,7 +24,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       DOB: {
-        type: Sequelize.DATE,
+        type: Sequelize.INTEGER,
       },
       gender: {
         type: Sequelize.ENUM('male', 'female', 'other'),
@@ -34,11 +34,11 @@ module.exports = {
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: Sequelize.INTEGER,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: Sequelize.INTEGER,
       },
     });
   },
