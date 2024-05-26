@@ -5,5 +5,6 @@ const controller = require('../controllers/employeeController');
 
 router.get('/', controller.getEmployees);
 router.get('/:id', controller.getEmployeeById);
+router.post('/', controller.createEmployee);
 
 module.exports = router;

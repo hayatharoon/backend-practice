@@ -41,4 +41,25 @@ module.exports = {
       errorHandler(error, res);
     }
   },
+  createEmployee: async (req, res) => {
+    try {
+      const { name, email, phoneNumber, address, DOB, gender, photo } = req.body;
+      const employee = await Employee.create({
+        name,
+        email,
+        phoneNumber,
+        address,
+        DOB,
+        gender,
+        photo,
+      });
+      res.status(201).json({
+        status: 'success',
+        message: 'Employee created successfully',
+        data: employee,
+      });
+    } catch (error) {
+      errorHandler(error, res);
+    }
+  },
 };
