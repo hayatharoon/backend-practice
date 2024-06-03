@@ -62,4 +62,26 @@ module.exports = {
       errorHandler(error, res);
     }
   },
+  updateEmployee: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const employee = await Employee.findByPk(id);
+      if (!employee) {
+        return res.status(404).json({
+          status: 'fail',
+          message: 'Employee not found',
+        });
+      }
+      await employee.update(req.body, {
+        silent: true,
+      });
+      res.status(200).json({
+        status: 'success',
+        message: 'Employee updated successfully',
+        data: employee,
+      });
+    } catch (error) {
+      errorHandler(error, res);
+    }
+  },
 };
