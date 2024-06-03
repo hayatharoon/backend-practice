@@ -84,4 +84,23 @@ module.exports = {
       errorHandler(error, res);
     }
   },
+  deleteEmployee: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const employee = await Employee.findByPk(id);
+      if (!employee) {
+        return res.status(404).json({
+          status: 'fail',
+          message: 'Employee not found',
+        });
+      }
+      await employee.destroy();
+      res.status(200).send({
+        status: 'success',
+        message: 'Employee deleted successfully',
+      });
+    } catch (error) {
+      errorHandler(error, res);
+    }
+  },
 };
